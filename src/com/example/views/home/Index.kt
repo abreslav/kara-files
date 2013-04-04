@@ -22,24 +22,5 @@ class IndexView() : HtmlView() {
             }
         }
     }
-    fun String.size3() = this.size * 2
-
 }
 
-val f: (String) -> Int = { it.size + 15 }
-val ef: String.() -> Int = { String.(): Int -> this.size + 15 }
-
-fun String.size2() = this.size * 2
-
-fun with<T>(t: T, body: T.() -> Unit) {
-    t.body()
-}
-
-fun main(args: Array<String>) {
-    println("abc".size2())
-
-    val indexView = IndexView()
-    with (indexView) {
-        println("asd".size3())
-    }
-}
