@@ -2,10 +2,18 @@
 package com.example.styles
 
 import kara.styles.*
+import kara.styles.TextAlign.*
 import com.example.styles.Styles.*
 
 enum class Styles : StyleClass {
     fileTable
+    permissions
+    permitted
+    not_permitted
+    parent
+    alt
+    normal
+    footnote
 }
 
 val main = "main"
@@ -28,7 +36,37 @@ class DefaultStyles() : Stylesheet() {
             borderRadius = 5.px
         }
         table(fileTable) {
+            tr(alt) {
+                backgroundColor = c("#EAF2D3")
+            }
+            td {
+                border = "1px solid #ccc"
+            }
+            td(parent) {
+                textAlign = center
+            }
+            td(permissions) {
+                margin = box(0.px)
+                padding = box(0.px)
+            }
             border = "1px solid #ccc"
+            attributes["border-collapse"] = "collapse"
+        }
+        table(permissions) {
+            td {
+                border = "none"
+                width = 25.px
+                textAlign = center
+            }
+            td(permitted) {
+                color = c("#070")
+            }
+            td(not_permitted) {
+                color = Color.fromRgb(0xBB, 0xBB, 0xBB)
+            }
+        }
+        div(footnote) {
+            fontSize = 50.percent
         }
     }
 }
