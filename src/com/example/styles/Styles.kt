@@ -22,7 +22,7 @@ class DefaultStyles() : Stylesheet() {
     override fun render() {
         body {
             backgroundColor = c("#f0f0f0")
-            fontFamily = "\"Lucida Sans Unicode\", \"Lucida Grande\", sans-serif"
+            fontFamily = """"Lucida Sans Unicode", "Lucida Grande", sans-serif"""
         }
         h1 {
             marginLeft = 1.em

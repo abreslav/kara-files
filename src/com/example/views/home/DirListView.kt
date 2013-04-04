@@ -7,7 +7,7 @@ import java.util.*
 import com.example.styles.Styles.*
 import com.example.styles.Styles
 
-class DirListView(val dir: String, val showHidden: Boolean) : HtmlView() {
+class DirListView(val dir: String) : HtmlView() {
     override fun render(context: ActionContext) {
         val dir = File(dir).getAbsoluteFile()
         if (!dir.exists()) {
@@ -27,7 +27,7 @@ class DirListView(val dir: String, val showHidden: Boolean) : HtmlView() {
             if (parentDir != null) {
                 tr {
                     td {
-                        a(href = Home.FileList(parentDir, showHidden)) {
+                        a(href = Home.FileList(parentDir)) {
                             +".."
                         }
                     }
@@ -40,16 +40,13 @@ class DirListView(val dir: String, val showHidden: Boolean) : HtmlView() {
             val files = dir.listFiles()?.toList() ?: listOf<File>()
             var isAlt = false
             for (file in files.sort(fileOrder)) {
-                if (file.isHidden()) {
-                    if (!showHidden) continue
-                }
                 isAlt = !isAlt
                 val rowClass = if (isAlt) alt else normal
 
                 tr(rowClass) {
                     td {
                         if (file.isDirectory()) {
-                            a(href = Home.FileList(file.getPath(), showHidden)) {
+                            a(href = Home.FileList(file.getPath())) {
                                 +file.getName()
                             }
                         }
@@ -63,17 +60,6 @@ class DirListView(val dir: String, val showHidden: Boolean) : HtmlView() {
                 }
             }
         }
-
-        renderToggleHiddenFiles()
-    }
-
-    fun BodyTag.renderToggleHiddenFiles() {
-        div(footnote) {
-            +"Hidden files: "
-            a(href = Home.FileList(dir, !showHidden)) {
-                +(if (showHidden) "hide" else "show")
-            }
-        }
     }
 
     fun BodyTag.renderPermissions(file: File) {
@@ -84,13 +70,11 @@ class DirListView(val dir: String, val showHidden: Boolean) : HtmlView() {
             )
         }
 
-        with (file) {
-            table(permissions) {
-                tr {
-                    ptd(canRead()) { +"r" }
-                    ptd(canWrite()) { +"w" }
-                    ptd(canExecute()) { +"x" }
-                }
+        table(permissions) {
+            tr {
+                ptd(file.canRead()) { +"r" }
+                ptd(file.canWrite()) { +"w" }
+                ptd(file.canExecute()) { +"x" }
             }
         }
     }
@@ -103,19 +87,3 @@ val fileOrder: Comparator<File> = Comparator {
                 else if (y.isDirectory() && x.isFile()) 1
                 else x.getName().compareTo(y.getName())
             }
-
-fun File.sizeString(): String {
-    val kb = 1024
-    val mb = 1024 * kb
-
-    val size = length()
-    return when {
-        size < kb -> "$size"
-        size < mb -> "${size / kb}K"
-        else -> "${size / mb}M"
-    }
-}
-
-fun <T> with(t: T, body: T.() -> Unit) {
-    t.body()
-}
