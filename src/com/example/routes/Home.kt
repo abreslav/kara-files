@@ -15,7 +15,7 @@ object Home {
 
     Get("/list")
     class FileList(val dir: String) : Request({
-        DirListView(dir)
+        DirListView(dir, true)
     })
 
     Get("/tree")

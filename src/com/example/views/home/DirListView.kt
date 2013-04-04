@@ -7,7 +7,7 @@ import java.util.*
 import com.example.styles.Styles.*
 import com.example.styles.Styles
 
-class DirListView(val dir: String) : HtmlView() {
+class DirListView(val dir: String, val showHidden: Boolean) : HtmlView() {
     override fun render(context: ActionContext) {
         val dir = File(dir).getAbsoluteFile()
         if (!dir.exists()) {
@@ -40,6 +40,8 @@ class DirListView(val dir: String) : HtmlView() {
             val files = dir.listFiles()?.toList() ?: listOf<File>()
             var isAlt = false
             for (file in files.sort(fileOrder)) {
+                if (file.isHidden() && !showHidden) continue
+
                 isAlt = !isAlt
                 val rowClass = if (isAlt) alt else normal
 
