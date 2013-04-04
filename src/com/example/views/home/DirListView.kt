@@ -27,7 +27,7 @@ class DirListView(val dir: String, val showHidden: Boolean) : HtmlView() {
             if (parentDir != null) {
                 tr {
                     td {
-                        a(href = Home.FileList(parentDir)) {
+                        a(href = Home.FileList(parentDir, showHidden)) {
                             +".."
                         }
                     }
@@ -48,7 +48,7 @@ class DirListView(val dir: String, val showHidden: Boolean) : HtmlView() {
                 tr(rowClass) {
                     td {
                         if (file.isDirectory()) {
-                            a(href = Home.FileList(file.getPath())) {
+                            a(href = Home.FileList(file.getPath(), showHidden)) {
                                 +file.getName()
                             }
                         }

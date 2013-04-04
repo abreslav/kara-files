@@ -11,7 +11,7 @@ class IndexView() : HtmlView() {
 
         ul {
             li {
-                a(href = Home.FileList(".")) {
+                a(href = Home.FileList(".", true)) {
                     +"List"
                 }
             }
