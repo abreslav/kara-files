@@ -3,18 +3,40 @@ import java.util.ArrayList
 fun main(args: Array<String>) {
 
 
+
+
+
+
+
+
+
     // Higher-order functions
 
     fun <T> let(t: T, body: (T) -> Unit) {
         body(t)
     }
 
+
+
     let(2 + 3, { x -> println(x * x) })
 
-    let(2 + 3) {
+
+
+    let (2 + 3) {
         x ->
         println(x * x)
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -32,14 +54,39 @@ fun main(args: Array<String>) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+}
+
+fun withDemo() {
+
     // Extension functions as values
+
+    fun <T> let(t: T, body: (T) -> Unit) {
+        body(t)
+    }
 
     fun <T> with(t: T, body: T.() -> Unit) {
         t.body()
     }
 
+
+
+
     val stringBuilder = StringBuilder()
     with(stringBuilder, { this.append("1") })
+
+
+
+
 
     with (stringBuilder) {
         append("Numbers: ")
@@ -47,7 +94,26 @@ fun main(args: Array<String>) {
             append(i)
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
 
 
 // Basic mechanics of builders
@@ -61,9 +127,33 @@ fun demo1() {
 
     with(UL()) {
         li()
+        li()
+        li()
+    }
+
+
+
+    fun ul(init: UL.() -> Unit) {
+        val ul = UL()
+        ul.init()
+    }
+
+
+    ul {
+        li()
+        li()
+        li()
     }
 
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -82,20 +172,6 @@ fun demo2() {
         }
     }
 
-    with(UL()) {
-        li {
-            // ...
-        }
-        li {
-            // ...
-        }
-    }
-
-
-
-
-
-
     fun ul(init: UL.() -> Unit) {
         val ul = UL()
         ul.init()
@@ -103,10 +179,10 @@ fun demo2() {
 
     ul {
         li {
-
+            // ...
         }
         li {
-
+            // ...
         }
     }
 
