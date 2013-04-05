@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="KaraExec">
+    <CLASSES>
+      <root url="file://$KARA_HOME$/lib" />
+      <root url="jar://$KARA_HOME$/modules/exec/kara-exec.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$KARA_HOME$/modules/exec/src/kara-exec-src.zip!/" />
+    </SOURCES>
+    <jarDirectory url="file://$KARA_HOME$/lib" recursive="false" />
+  </library>
+</component>
