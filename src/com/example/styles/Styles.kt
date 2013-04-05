@@ -16,7 +16,6 @@ enum class Styles : StyleClass {
     footnote
 }
 
-val main = "main"
 
 class DefaultStyles() : Stylesheet() {
     override fun render() {
@@ -70,4 +69,6 @@ class DefaultStyles() : Stylesheet() {
         }
     }
 }
+
+val main = "main"
 
