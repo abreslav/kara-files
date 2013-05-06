@@ -82,7 +82,7 @@ fun withDemo() {
 
 
     val stringBuilder = StringBuilder()
-    with(stringBuilder, { this.append("1") })
+    with(stringBuilder, { append("1") })
 
 
 
